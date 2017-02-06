@@ -88,9 +88,9 @@ input.search {
 }
 .close_search_results {
   display: flex;
+  display: -webkit-box;
   justify-content: center;
   margin: 5px auto;
-  text-align: center;
   background-color: rgba(0,0,0,.2);
   width: 50%;
   height: 20px;
