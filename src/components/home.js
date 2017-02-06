@@ -128,11 +128,19 @@ constructor (props) {
   }
 
   bodyHideSearchResults (event) {
+
+    /*--------------- Clean input search -----------------*/
+
+    const search_input = document.querySelector(".search");
+    search_input.value = "";
+    this.setState({search: ""});
+
+    /*--------------- Hide search results when user clicks outside -----------------*/
+
     const search_li_body = event.target.parentElement.classList[0];
     const search_li_class = document.querySelectorAll(".search_ul_li");
 
     search_li_class.forEach(li_class => {
-      // console.log(li_class.classList[0]);
       if (search_li_body === li_class.classList[0]) {
         document.body.removeEventListener("click", this.bodyHideSearchResults);
       }
