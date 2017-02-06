@@ -96,6 +96,7 @@ constructor (props) {
     this.search_results = this.search_results.bind(this);
     this.group = this.group.bind(this);
     this.group_display = this.group_display.bind(this);
+    this.bodyHideSearchResults = this.bodyHideSearchResults.bind(this);
   }
 
 /*------------------------------------------------------*/
@@ -103,6 +104,8 @@ constructor (props) {
 /*------------------------------------------------------*/
 
   searchUpdated (event) {
+    document.body.addEventListener("click", this.bodyHideSearchResults);
+
       this.setState({search: event.target.value});
       this.setState({temp_user: []});
       const resultsArray = this.results();
@@ -124,14 +127,28 @@ constructor (props) {
     this.setState({results: []});
   }
 
+  bodyHideSearchResults (event) {
+    const search_li_body = event.target.parentElement.classList[0];
+    const search_li_class = document.querySelectorAll(".search_ul_li");
+
+    search_li_class.forEach(li_class => {
+      // console.log(li_class.classList[0]);
+      if (search_li_body === li_class.classList[0]) {
+        document.body.removeEventListener("click", this.bodyHideSearchResults);
+      }
+      if (search_li_body !== li_class.classList[0]) {
+        this.setState({results: []});
+      }
+    })
+  }
+
 
   search_results () {
-
     return (
       <ul className="search_ul">
         {this.state.results.map((user, index)=> {
           return <div key={index}>
-            <li onClick={this.userInfo.bind(this, user, index)}>
+            <li className="search_ul_li" onClick={this.userInfo.bind(this, user, index)}>
               <span className="display_span_line" style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
               <span>{`${user.first_name} ${user.last_name}`}</span>
               <span className="display_span_region">{`${user.region}`}</span>
@@ -146,7 +163,7 @@ constructor (props) {
   /*--------------- userInfo function - cont. on group_display () -----------------*/
   /*-------------------------------------------------------------------------------*/
 
-  userInfo (user, index, e) {
+  userInfo (user, index, event) {
 
     this.setState({results: []});
 
@@ -389,7 +406,7 @@ constructor (props) {
 
         <form className="search-form">
             <input type="text" className="search" placeholder="Name" onChange={this.searchUpdated}/>
-            <button className="close_search_results" onClick={this.hideSearchResults.bind(this)}> Hide Search Results</button>
+            {/* <button className="close_search_results" onClick={this.hideSearchResults.bind(this)}> Hide Search Results</button> */}
           <div>{this.search_results()}</div>
         </form>
 
