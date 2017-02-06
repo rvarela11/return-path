@@ -3,7 +3,6 @@ html {
   font-family:'helvetica neue';
   font-weight: 300;
 }
-
 body {
   margin: 0;
 }
@@ -38,7 +37,6 @@ body {
   background:black;
   width: 100%;
 }
-
 .group_buttons_ul {
   margin: 0;
   padding:0;
@@ -47,10 +45,8 @@ body {
   color: #fff;
   cursor: pointer;
 }
-
 .group_buttons_ul li {
   flex:1;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +54,6 @@ body {
   font-size: 1rem;
   text-transform: uppercase;
 }
-
 .group_buttons_ul li:first-child {
   background-color: #cf196f;
 }
@@ -83,8 +78,6 @@ input.search {
   font-size: 1rem;
   padding: 10px 0;
   color: #000;
-  display: flex;
-  justify-content: flex-start;
 }
 .close_search_results {
   display: flex;
@@ -96,33 +89,31 @@ input.search {
   height: 20px;
   border: none;
   border-radius: 5px;
-  color: #fff;
   cursor: pointer;
 }
-.suggestions {
+.search_ul {
   margin: 0 auto;
   padding: 0;
   position: absolute;
   z-index: 10;
   width: 50%;
 }
-.suggestions li {
+.search_ul li {
   list-style: none;
   border-bottom: 1px solid #D8D8D8;
   margin: 0;
-  padding: 3%;
+  padding: 2%;
   transition: background 0.2s;
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
   cursor: pointer;
-  background: #333;
-  color: #fff;
+  background: #999;
   border-radius: 5px;
-
 }
-.suggestions li:hover {
+.search_ul li:hover {
   background: #000;
+  color: #fff;
 }
 
 /*--------------------------------------------------------*/
@@ -147,17 +138,18 @@ input.search {
   display: flex;
   text-transform: capitalize;
   cursor: pointer;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
 }
 .display_ul li:hover {
   background: #000;
-  color: #fff;
-  border-radius: 5px;
 }
 .button_all {
   border-bottom: 10px solid #cf196f;
 }
 .button_it {
-  border-bottom: 10px solid blue;
+  border-bottom: 10px solid #3333FF;
 }
 .button_sales {
   border-bottom: 10px solid #ffc600;
@@ -180,8 +172,7 @@ input.search {
 }
 
 .user_display_ul li:hover {
-  background: #fff;
-  color: #000;
+  background: #333;
   border-radius: 0px;
 }
 
@@ -213,7 +204,7 @@ input.search {
   cursor: pointer;
 }
 .user_button_it:hover {
-  background-color: blue;
+  background-color: #3333FF;
 }
 .user_button_sales:hover {
   background-color: #ffc600
@@ -221,7 +212,7 @@ input.search {
 .user_button_support:hover {
   background-color: green;
 }
-.display_span_circle {
+.display_span_line {
   width: 25px;
 	height: 5px;
   margin-top: 6px;
@@ -237,7 +228,7 @@ input.search {
   .header_background_image {
     height: 8vh;
   }
-  .search-form, .suggestions, .display_ul {
+  .search-form, .search_ul, .display_ul {
     width: 100%;
   }
   .group_buttons_ul li {

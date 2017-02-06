@@ -103,12 +103,16 @@ constructor (props) {
 /*------------------------------------------------------*/
 
   searchUpdated (event) {
+      this.setState({search: event.target.value});
       this.setState({temp_user: []});
-      const resultsArray = this.results(event.target.value, this.state.data);
+      const resultsArray = this.results();
       this.setState({results: resultsArray});
   }
 
-  results (wordToMatch, data) {
+  results () {
+    const wordToMatch = this.state.search;
+    const data  = this.state.data;
+
     return data.filter(name => {
         const regex = new RegExp(wordToMatch, 'gi');
         return name.first_name.match(regex) || name.last_name.match(regex)
@@ -124,11 +128,11 @@ constructor (props) {
   search_results () {
 
     return (
-      <ul className="suggestions">
+      <ul className="search_ul">
         {this.state.results.map((user, index)=> {
-          return <div className= "div_search_results" key={index}>
+          return <div key={index}>
             <li onClick={this.userInfo.bind(this, user, index)}>
-              <span className="display_span_circle" style={{background: (user.group === "IT") ? 'blue' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
+              <span className="display_span_line" style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
               <span>{`${user.first_name} ${user.last_name}`}</span>
               <span className="display_span_region">{`${user.region}`}</span>
             </li>
@@ -184,8 +188,8 @@ constructor (props) {
         div_button_top.style.backgroundColor = "#cf196f";
       }
       else if (button_name === "IT") {
-        e.target.style.backgroundColor = "blue";
-        div_button_top.style.backgroundColor = "blue";
+        e.target.style.backgroundColor = "#3333FF";
+        div_button_top.style.backgroundColor = "#3333FF";
       }
       else if (button_name === "Sales") {
         e.target.style.backgroundColor = "#ffc600";
@@ -287,7 +291,7 @@ constructor (props) {
         {group_display_results.map((user, index)=> {
           return <div key={index}>
               <li onClick={this.userInfo.bind(this, user, index)}>
-                <span className="display_span_circle" style={{background: (user.group === "IT") ? 'blue' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
+                <span className="display_span_line" style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
                 <span>{`${user.first_name} ${user.last_name}`}</span>
                 <span className="display_span_region">{`${user.region}`}</span>
               </li>
@@ -302,7 +306,7 @@ constructor (props) {
         {temp_user.map((user, index)=> {
           return <div key={index}>
               <li>
-                <span className="display_span_circle" style={{background: (user.group === "IT") ? 'blue' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
+                <span className="display_span_line" style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
                 <span>{`${user.first_name} ${user.last_name}`}</span>
                 <span className="display_span_region">{`${user.region}`}</span>
               </li>
