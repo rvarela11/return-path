@@ -1,0 +1,246 @@
+html {
+  box-sizing: border-box;
+  font-family:'helvetica neue';
+  font-weight: 300;
+}
+
+body {
+  margin: 0;
+}
+
+/*------------------------------------------------*/
+/*---------------- Home Header -------------------*/
+/*------------------------------------------------*/
+
+.header_background_image {
+  border-top: 10px solid #fff;
+  border-bottom: 10px solid #fff;
+  height: 10vh;
+  background:url(../images/verb_logo_background_white.png) center center no-repeat;
+  background-size: contain;
+}
+
+/*---------------------------------------------------------*/
+/*---------------- Button Selected Line -------------------*/
+/*---------------------------------------------------------*/
+
+.div_button_color_selected {
+  height: 10px;
+  background-color: #cf196f;
+  width: 100%;
+}
+
+/*--------------------------------------------------*/
+/*---------------- Group Buttons -------------------*/
+/*--------------------------------------------------*/
+
+.div_group_buttons {
+  background:black;
+  width: 100%;
+}
+
+.group_buttons_ul {
+  margin: 0;
+  padding:0;
+  list-style: none;
+  display:flex;
+  color: #fff;
+  cursor: pointer;
+}
+
+.group_buttons_ul li {
+  flex:1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.group_buttons_ul li:first-child {
+  background-color: #cf196f;
+}
+
+/*--------------------------------------------------*/
+/*----------------- Search Form --------------------*/
+/*--------------------------------------------------*/
+
+.search-form {
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
+}
+input.search {
+  margin: 0;
+  text-align: center;
+  outline:0;
+  border: none;
+  border-bottom: 2px solid #000;
+  width: 100%;
+  position: relative;
+  font-size: 1rem;
+  padding: 10px 0;
+  color: #000;
+  display: flex;
+  justify-content: flex-start;
+}
+.close_search_results {
+  display: flex;
+  justify-content: center;
+  margin: 5px auto;
+  text-align: center;
+  background-color: rgba(0,0,0,.2);
+  width: 50%;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+.suggestions {
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  z-index: 10;
+  width: 50%;
+}
+.suggestions li {
+  list-style: none;
+  border-bottom: 1px solid #D8D8D8;
+  margin: 0;
+  padding: 3%;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+
+}
+.suggestions li:hover {
+  background: #000;
+}
+
+/*--------------------------------------------------------*/
+/*------------------- Group Display ----------------------*/
+/*--------------------------------------------------------*/
+
+.display_title {
+  text-align: center;
+  font-weight: 300;
+  margin: 2% 0;
+}
+.display_ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 50%;
+}
+.display_ul li {
+  border-bottom: 1px solid #D8D8D8;
+  margin: 0;
+  padding: 2%;
+  display: flex;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.display_ul li:hover {
+  background: #000;
+  color: #fff;
+  border-radius: 5px;
+}
+.button_all {
+  border-bottom: 10px solid #cf196f;
+}
+.button_it {
+  border-bottom: 10px solid blue;
+}
+.button_sales {
+  border-bottom: 10px solid #ffc600;
+}
+.button_support {
+  border-bottom: 10px solid green;
+}
+.display_span_region {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*-------------------------------------------------------*/
+/*------------------- User Display ----------------------*/
+/*-------------------------------------------------------*/
+
+.user_display_ul li {
+  cursor: default;
+}
+
+.user_display_ul li:hover {
+  background: #fff;
+  color: #000;
+  border-radius: 0px;
+}
+
+.user_div_buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.user_div_buttons p {
+  border: 1px solid #D8D8D8;
+  border-top: 0;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  margin: 0;
+  padding: 1%;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+}
+.user_div_buttons p:first-child {
+  background-color: #000;
+  color: #fff;
+}
+.user_p_buttons:hover {
+  color: #fff;
+  cursor: pointer;
+}
+.user_button_it:hover {
+  background-color: blue;
+}
+.user_button_sales:hover {
+  background-color: #ffc600
+}
+.user_button_support:hover {
+  background-color: green;
+}
+.display_span_circle {
+  width: 25px;
+	height: 5px;
+  margin-top: 6px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+/*--------------------------------------------------*/
+/*----------------- Responsive  --------------------*/
+/*--------------------------------------------------*/
+
+@media screen and (max-width: 720px) {
+  .header_background_image {
+    height: 8vh;
+  }
+  .search-form, .suggestions, .display_ul {
+    width: 100%;
+  }
+  .group_buttons_ul li {
+    font-size: 0.75rem;
+  }
+}
