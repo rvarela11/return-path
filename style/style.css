@@ -11,7 +11,7 @@ body {
 /*---------------- Home Header -------------------*/
 /*------------------------------------------------*/
 
-.header_background_image {
+header {
   border-top: 10px solid #fff;
   border-bottom: 10px solid #fff;
   height: 10vh;
@@ -19,25 +19,25 @@ body {
   background-size: contain;
 }
 
-/*---------------------------------------------------------*/
-/*---------------- Button Selected Line -------------------*/
-/*---------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/*---------------- Color Button Selected Line -------------------*/
+/*---------------------------------------------------------------*/
 
-.div_button_color_selected {
+.color-buttons__top--selected {
   height: 10px;
   background-color: #cf196f;
   width: 100%;
 }
 
 /*--------------------------------------------------*/
-/*---------------- Group Buttons -------------------*/
+/*---------------- Color Buttons -------------------*/
 /*--------------------------------------------------*/
 
-.div_group_buttons {
+.color-buttons {
   background:black;
   width: 100%;
 }
-.group_buttons_ul {
+.color-buttons ul {
   margin: 0;
   padding:0;
   list-style: none;
@@ -45,7 +45,7 @@ body {
   color: #fff;
   cursor: pointer;
 }
-.group_buttons_ul li {
+.color-buttons ul li {
   flex:1;
   display: flex;
   justify-content: center;
@@ -54,8 +54,62 @@ body {
   font-size: 1rem;
   text-transform: uppercase;
 }
-.group_buttons_ul li:first-child {
+.color-buttons ul li:first-child {
   background-color: #cf196f;
+}
+.color-buttons ul li:first-child {
+  border-bottom: 10px solid #cf196f;
+}
+.color-buttons ul li:nth-child(2) {
+  border-bottom: 10px solid #3333FF;
+}
+.color-buttons ul li:nth-child(3) {
+  border-bottom: 10px solid #ffc600;
+}
+.color-buttons ul li:nth-child(4) {
+  border-bottom: 10px solid green;
+}
+
+/*---------------------------------------------------*/
+/*-------------------  Display ----------------------*/
+/*---------------------------------------------------*/
+
+.display__title {
+  text-align: center;
+  font-weight: 300;
+  margin: 2% 0;
+}
+.display__ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 50%;
+}
+.display__ul li {
+  border-bottom: 1px solid #D8D8D8;
+  margin: 0;
+  padding: 2%;
+  display: flex;
+  text-transform: capitalize;
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+.display__ul li:hover {
+  background: #000;
+}
+.display__ul li span:first-child {
+  width: 25px;
+	height: 5px;
+  margin-top: 6px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+.display__ul li span:last-child {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /*--------------------------------------------------*/
@@ -67,7 +121,7 @@ body {
   margin: auto;
   margin-top: 2%;
 }
-input.search {
+.search-form__input {
   margin: 0;
   text-align: center;
   outline:0;
@@ -79,107 +133,34 @@ input.search {
   padding: 10px 0;
   color: #000;
 }
-.close_search_results {
-  display: flex;
-  display: -webkit-box;
-  justify-content: center;
-  margin: 5px auto;
-  background-color: rgba(0,0,0,.2);
-  width: 50%;
-  height: 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.search_ul {
-  margin: 0 auto;
-  padding: 0;
+.search-form-results__ul {
   position: absolute;
   z-index: 10;
-  width: 50%;
 }
-.search_ul li {
-  list-style: none;
-  border-bottom: 1px solid #D8D8D8;
-  margin: 0;
-  padding: 2%;
-  display: flex;
-  text-transform: capitalize;
-  cursor: pointer;
+.search-form-results__ul li {
   background: #999;
-  border-radius: 5px;
 }
-.search_ul li:hover {
-  background: #000;
+.search-form-results__ul li:hover {
   color: #fff;
 }
 
-/*--------------------------------------------------------*/
-/*------------------- Group Display ----------------------*/
-/*--------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/*------------------- Single User Display ----------------------*/
+/*--------------------------------------------------------------*/
 
-.display_title {
-  text-align: center;
-  font-weight: 300;
-  margin: 2% 0;
-}
-.display_ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  width: 50%;
-}
-.display_ul li {
-  border-bottom: 1px solid #D8D8D8;
-  margin: 0;
-  padding: 2%;
-  display: flex;
-  text-transform: capitalize;
-  cursor: pointer;
-  background: #333;
-  color: #fff;
-  border-radius: 5px;
-}
-.display_ul li:hover {
-  background: #000;
-}
-.button_all {
-  border-bottom: 10px solid #cf196f;
-}
-.button_it {
-  border-bottom: 10px solid #3333FF;
-}
-.button_sales {
-  border-bottom: 10px solid #ffc600;
-}
-.button_support {
-  border-bottom: 10px solid green;
-}
-.display_span_region {
-  flex: 3;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/*-------------------------------------------------------*/
-/*------------------- User Display ----------------------*/
-/*-------------------------------------------------------*/
-
-.user_display_ul li {
+.single-user__ul li {
   cursor: default;
 }
-
-.user_display_ul li:hover {
+.single-user__ul li:hover {
   background: #333;
   border-radius: 0px;
 }
-
-.user_div_buttons {
+.single-user__buttons {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
-.user_div_buttons p {
+.single-user__buttons p {
   border: 1px solid #D8D8D8;
   border-top: 0;
   border-radius: 5px;
@@ -193,29 +174,22 @@ input.search {
   align-items: center;
   text-transform: capitalize;
 }
-.user_div_buttons p:first-child {
+.single-user__buttons p:first-child {
   background-color: #000;
   color: #fff;
 }
-.user_p_buttons:hover {
-  color: #fff;
+.single-user__buttons p:nth-child(1n+2):hover {
   cursor: pointer;
+  color: #fff;
 }
-.user_button_it:hover {
+.single-user__buttons p:nth-child(2):hover {
   background-color: #3333FF;
 }
-.user_button_sales:hover {
-  background-color: #ffc600
+.single-user__buttons p:nth-child(3):hover {
+  background-color: #ffc600;
 }
-.user_button_support:hover {
+.single-user__buttons p:nth-child(4):hover {
   background-color: green;
-}
-.display_span_line {
-  width: 25px;
-	height: 5px;
-  margin-top: 6px;
-  margin-right: 15px;
-  border-radius: 5px;
 }
 
 /*--------------------------------------------------*/
@@ -223,13 +197,13 @@ input.search {
 /*--------------------------------------------------*/
 
 @media screen and (max-width: 720px) {
-  .header_background_image {
+  header {
     height: 8vh;
   }
-  .search-form, .search_ul, .display_ul {
+  .search-form, .search-form-results__ul, .display__ul {
     width: 100%;
   }
-  .group_buttons_ul li {
+  .color-buttons ul li {
     font-size: 0.75rem;
   }
 }
