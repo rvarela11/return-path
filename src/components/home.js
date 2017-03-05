@@ -98,38 +98,6 @@ constructor (props) {
     this.bodyHideSearchResults = this.bodyHideSearchResults.bind(this);
   }
 
-  /*-----------------------------------------------*/
-  /*------------------ Render ---------------------*/
-  /*-----------------------------------------------*/
-
-  render() {
-
-    return <div>
-      <header></header>
-
-        <section className="color-buttons">
-            <div className="color-buttons__top--selected"></div>
-            <ul>
-              <li onClick={this.colorButton}>All</li>
-              <li onClick={this.colorButton}>IT</li>
-              <li onClick={this.colorButton}>Sales</li>
-              <li onClick={this.colorButton}>Support</li>
-            </ul>
-        </section>
-
-        <section>
-          <form className="search-form">
-              <input type="text" className="search-form__input" placeholder="Name" onChange={this.searchUpdated}/>
-            <div>{this.search_results()}</div>
-          </form>
-        </section>
-
-        <section>
-          <div>{this.display()}</div>
-        </section>
-    </div>
-  }
-
   /*------------------------------------------------------*/
   /*--------------- ColorButton function -----------------*/
   /*-----------------------------------------------------*/
@@ -369,11 +337,9 @@ constructor (props) {
       this.setState({data_group_array});
     }
   }
-<<<<<<< HEAD
-=======
 
   /*-----------------------------------------------*/
-  /*------------------ render ---------------------*/
+  /*------------------ Render ---------------------*/
   /*-----------------------------------------------*/
 
   render() {
@@ -381,26 +347,30 @@ constructor (props) {
     return <div>
       <header></header>
 
-        <div className="div_group_buttons">
-          <div className="div_button_color_selected"></div>
-          <ul className="group_buttons_ul">
-            <li className="group_buttons_li button_all" onClick={this.group}>All</li>
-            <li className="group_buttons_li button_it" onClick={this.group}>IT</li>
-            <li className="group_buttons_li button_sales" onClick={this.group}>Sales</li>
-            <li className="group_buttons_li button_support" onClick={this.group}>Support</li>
-          </ul>
+        <div className="color-buttons">
+            <div className="color-buttons__top--selected"></div>
+            <ul>
+              <li onClick={this.colorButton}>All</li>
+              <li onClick={this.colorButton}>IT</li>
+              <li onClick={this.colorButton}>Sales</li>
+              <li onClick={this.colorButton}>Support</li>
+            </ul>
         </div>
 
-        <form className="search-form">
-            <input type="text" className="search" placeholder="Name" onChange={this.searchUpdated}/>
-            {/* <button className="close_search_results" onClick={this.hideSearchResults.bind(this)}> Hide Search Results</button> */}
-          <div>{this.search_results()}</div>
-        </form>
+        <div>
+          <form className="search-form">
+              <input type="text" className="search-form__input" placeholder="Name" onChange={this.searchUpdated}/>
+            <div>{this.search_results()}</div>
+          </form>
+        </div>
 
-      <div className="group_display">{this.group_display()}</div>
+        <div>
+          <div>{this.display()}</div>
+        </div>
+
     </div>
   }
->>>>>>> 5414ade54026b4e7f8d112f34ce04bda2b427589
+
 }
 
 export default Home;
