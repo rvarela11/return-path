@@ -400,7 +400,7 @@ constructor (props) {
   render() {
 
     return <div>
-      <header className="header_background_image"></header>
+      <header></header>
 
         <div className="div_group_buttons">
           <div className="div_button_color_selected"></div>

@@ -11,7 +11,7 @@ body {
 /*---------------- Home Header -------------------*/
 /*------------------------------------------------*/
 
-.header_background_image {
+header {
   border-top: 10px solid #fff;
   border-bottom: 10px solid #fff;
   height: 10vh;
@@ -223,7 +223,7 @@ input.search {
 /*--------------------------------------------------*/
 
 @media screen and (max-width: 720px) {
-  .header_background_image {
+  header {
     height: 8vh;
   }
   .search-form, .search_ul, .display_ul {
