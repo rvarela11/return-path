@@ -2,90 +2,57 @@ html {
   box-sizing: border-box;
   font-family:'helvetica neue';
   font-weight: 300;
+  color: #484848;
 }
 body {
   margin: 0;
+  height: 100vh;
 }
-
-/*------------------------------------------------*/
-/*---------------- Home Header -------------------*/
-/*------------------------------------------------*/
-
-header {
-  border-top: 10px solid #fff;
-  border-bottom: 10px solid #fff;
-  height: 10vh;
-  background:url(../images/verb_logo_background_white.png) center center no-repeat;
-  background-size: contain;
-}
-
-/*---------------------------------------------------------------*/
-/*---------------- Color Button Selected Line -------------------*/
-/*---------------------------------------------------------------*/
-
-.color-buttons__top--selected {
-  height: 10px;
-  background-color: #cf196f;
-  width: 100%;
-}
-
-/*--------------------------------------------------*/
-/*---------------- Color Buttons -------------------*/
-/*--------------------------------------------------*/
-
-.color-buttons {
-  background:black;
-  width: 100%;
-}
-.color-buttons ul {
+ul {
+  list-style: none;
   margin: 0;
-  padding:0;
-  list-style: none;
-  display:flex;
-  color: #fff;
-  cursor: pointer;
-}
-.color-buttons ul li {
-  flex:1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-.color-buttons ul li:first-child {
-  background-color: #cf196f;
-}
-.color-buttons ul li:first-child {
-  border-bottom: 10px solid #cf196f;
-}
-.color-buttons ul li:nth-child(2) {
-  border-bottom: 10px solid #3333FF;
-}
-.color-buttons ul li:nth-child(3) {
-  border-bottom: 10px solid #ffc600;
-}
-.color-buttons ul li:nth-child(4) {
-  border-bottom: 10px solid green;
-}
-
-/*---------------------------------------------------*/
-/*-------------------  Display ----------------------*/
-/*---------------------------------------------------*/
-
-.display__title {
-  text-align: center;
-  font-weight: 300;
-  margin: 2% 0;
-}
-.display__ul {
-  list-style: none;
   padding: 0;
-  margin: 0 auto;
-  width: 50%;
 }
-.display__ul li {
+
+/*---------- Header ----------*/
+
+header h1,h5{
+  text-align: center;
+}
+
+/*---------- Filters ----------*/
+
+.filters {
+  background-color: #ccc;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1%;
+}
+.filters div {
+}
+.filters__dropdown {
+  width: 15%;
+}
+.filters__search {
+  flex: 1;
+}
+.filters__dropdown select {
+  width: 100%;
+  height: 30px;
+}
+.filters__search input {
+  margin-left: 20%;
+  height: 30px;
+  border: none;
+  width: 40%;
+  padding-left: 1%
+}
+.search-results {
+  width: 33.25%;
+}
+.search-results li {
   border-bottom: 1px solid #D8D8D8;
   margin: 0;
   padding: 2%;
@@ -96,114 +63,70 @@ header {
   color: #fff;
   border-radius: 5px;
 }
-.display__ul li:hover {
+.search-results li:hover {
   background: #000;
 }
-.display__ul li span:first-child {
-  width: 25px;
-	height: 5px;
-  margin-top: 6px;
-  margin-right: 15px;
-  border-radius: 5px;
-}
-.display__ul li span:last-child {
-  flex: 3;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/*--------------------------------------------------*/
-/*----------------- Search Form --------------------*/
-/*--------------------------------------------------*/
-
-.search-form {
-  width: 50%;
-  margin: auto;
-  margin-top: 2%;
-}
-.search-form__input {
-  margin: 0;
-  text-align: center;
-  outline:0;
-  border: none;
-  border-bottom: 2px solid #000;
-  width: 100%;
-  position: relative;
-  font-size: 1rem;
-  padding: 10px 0;
-  color: #000;
-}
-.search-form-results__ul {
+.search-form__ul {
   position: absolute;
   z-index: 10;
+  margin-left: 16.75%;
 }
-.search-form-results__ul li {
+.search-form__ul li {
   background: #999;
 }
-.search-form-results__ul li:hover {
+.search-form__ul li:hover {
   color: #fff;
 }
 
-/*--------------------------------------------------------------*/
-/*------------------- Single User Display ----------------------*/
-/*--------------------------------------------------------------*/
+/*---------- Home ----------*/
 
-.single-user__ul li {
-  cursor: default;
+.home {
+  background-color: #eee;
 }
-.single-user__ul li:hover {
-  background: #333;
-  border-radius: 0px;
-}
-.single-user__buttons {
+.home__labels,
+.home__results {
   display: flex;
   flex-direction: row;
-  width: 100%;
 }
-.single-user__buttons p {
-  border: 1px solid #D8D8D8;
-  border-top: 0;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  margin: 0;
-  padding: 1%;
+.home__labels {
+  padding-top: 15px;
+  margin-right: 20px;
+}
+.home__results {
+  background-color: #fff;
+  margin: 15px 20px 15px 0;
+  border-right: 5px solid red;
+}
+.home__results-false {
+  background-color: #eee;
+  text-decoration: line-through;
+}
+.home__labels li,
+.home__results li {
   display: flex;
-  flex: 1;
+  /*flex: 1;*/
+  align-items: center;
+}
+.home__labels li:first-child,
+.home__results li:first-child {
+  background-color: #eee;
+  display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: capitalize;
+  width: 10%;
 }
-.single-user__buttons p:first-child {
-  background-color: #000;
-  color: #fff;
+.home__labels li:nth-child(1n+2),
+.home__results li:nth-child(1n+2) {
+  flex: 1;
 }
-.single-user__buttons p:nth-child(1n+2):hover {
-  cursor: pointer;
-  color: #fff;
+.home__labels li:nth-child(2),
+.home__results li:nth-child(2) {
+  padding-left: 25px;
 }
-.single-user__buttons p:nth-child(2):hover {
-  background-color: #3333FF;
+.home__results li h5 {
+  font-weight: 400;
 }
-.single-user__buttons p:nth-child(3):hover {
-  background-color: #ffc600;
-}
-.single-user__buttons p:nth-child(4):hover {
-  background-color: green;
-}
-
-/*--------------------------------------------------*/
-/*----------------- Responsive  --------------------*/
-/*--------------------------------------------------*/
-
-@media screen and (max-width: 720px) {
-  header {
-    height: 8vh;
-  }
-  .search-form, .search-form-results__ul, .display__ul {
-    width: 100%;
-  }
-  .color-buttons ul li {
-    font-size: 0.75rem;
-  }
+.home__results select {
+  width: 90%;
+  height: 30px;
 }

@@ -1,376 +1,207 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { API, dropdownsAPI } from '../actions/index';
+
+import Header from './Header';
+import Filter from './filters';
 
 class Home extends Component {
 
-  /*-------------------------------------------------------------*/
-  /*--------------- componentWillMount function -----------------*/
-  /*-------------------------------------------------------------*/
-
-  /* This function will gather the user.group data from the data array and push
-     them to specific arrays. */
-
-  componentWillMount () {
-    const all_data = this.state.data;
-    const it_array = this.state.it;
-    const sales_array = this.state.sales;
-    const support_array = this.state.support;
-
-    all_data.forEach((user) => {
-      if (user.group === "IT") {
-        it_array.push(user);
-        this.setState({it_array});
-       }
-     if (user.group === "Sales") {
-       sales_array.push(user);
-       this.setState({sales_array});
-     }
-     if (user.group === "Support") {
-       support_array.push(user);
-       this.setState({support_array});
-     }
-    });
-  }
-
-constructor (props) {
+  constructor (props) {
     super(props);
-    this.state = {
-      data: [{
-        first_name: "Richard",
-        last_name: "Reedy",
-        region: "West",
-        group: "IT"
-      },
-      {
-        first_name: "Suzi",
-        last_name: "Sosa",
-        region: "Midwest",
-        group: "Sales"
-      },
-      {
-        first_name: "Robert",
-        last_name: "Varela",
-        region: "Southwest",
-        group: "Support"
-      },
-      {
-        first_name: "Maddie",
-        last_name: "Serviente",
-        region: "South",
-        group: "IT"
-      },
-      {
-        first_name: "Jesse",
-        last_name: "Jorgenson",
-        region: "Northeast",
-        group: "Sales"
-      },
-      {
-        first_name: "Laura",
-        last_name: "Broderick",
-        region: "West",
-        group: "IT"
-      },
-      {
-        first_name: "David",
-        last_name: "Thomas",
-        region: "Midwest",
-        group: "Sales"
-      },
-      {
-        first_name: "Tommy",
-        last_name: "Lynn",
-        region: "South",
-        group: "Support"
-      }],
-      it: [],
-      sales: [],
-      support: [],
-      results: [],
-      temp_user: [],
-      password: "button",
-      button: "All"
-    }
-    this.searchUpdated = this.searchUpdated.bind(this);
-    this.results = this.results.bind(this);
-    this.search_results = this.search_results.bind(this);
-    this.colorButton = this.colorButton.bind(this);
-    this.display = this.display.bind(this);
-    this.bodyHideSearchResults = this.bodyHideSearchResults.bind(this);
+    this.state = {}
+    this.homeResultsDisplay = this.homeResultsDisplay.bind(this);
+
+    this.resultsDropdownFolder = this.resultsDropdownFolder.bind(this);
+    this.resultsDropdownFolderColor = this.resultsDropdownFolderColor.bind(this);
+    this.ulClass = this.ulClass.bind(this);
+    this.dropdownFolderPick = this.dropdownFolderPick.bind(this);
+    this.checkboxOrganize = this.checkboxOrganize.bind(this);
   }
 
-  /*------------------------------------------------------*/
-  /*--------------- ColorButton function -----------------*/
-  /*-----------------------------------------------------*/
-
-  // This function runs everytime a colored button is clicked.
-  // This is a 2 step function.
-
-  colorButton (e) {
-
-    this.setState({temp_user: []});
-    this.setState({password: "button"});
-
-    // Step 1 = Change button color when clicked
-
-    const button_name = e.target.innerHTML;
-    const button_color = window.getComputedStyle(e.target).backgroundColor;
-    const all_buttons_li = document.querySelectorAll(".color-buttons ul li");
-    const button_top = document.querySelector(".color-buttons__top--selected");
-
-      if (button_color == "rgba(0, 0, 0, 0)" ) {
-        all_buttons_li.forEach(button => {
-            button.style.backgroundColor = "rgba(0, 0, 0, 0)";
-      })
-
-      if (button_name === "All") {
-        e.target.style.backgroundColor = "#cf196f";
-        button_top.style.backgroundColor = "#cf196f";
-      }
-      else if (button_name === "IT") {
-        e.target.style.backgroundColor = "#3333FF";
-        button_top.style.backgroundColor = "#3333FF";
-      }
-      else if (button_name === "Sales") {
-        e.target.style.backgroundColor = "#ffc600";
-        button_top.style.backgroundColor = "#ffc600";
-      }
-      else if (button_name === "Support") {
-        e.target.style.backgroundColor = "green";
-        button_top.style.backgroundColor = "green";
-      }
-    }
-
-    // Step 2 = Display the right info
-
-    const filters = ["All", "IT", "Sales", "Support"];
-    filters.forEach((filter) => {
-      if (filter === button_name) {
-        this.setState({button: filter});
-      }
-    });
+  componentDidMount() {
+    this.props.API();
+    this.props.dropdownsAPI();
   }
 
-  /*--------------------------------------------------*/
-  /*--------------- display function -----------------*/
-  /*--------------------------------------------------*/
+  /*--------------------------------------------------------*/
+  /*--------------- Returning Display Data -----------------*/
+  /*--------------------------------------------------------*/
 
-  display () {
-
-    const temp_user = this.state.temp_user;
-
-    const password = this.state.password;
-
-    if (password === "button") {
-      let user_display_results = [];
-      let button_name = this.state.button;
-
-      if (button_name === "All") {
-        user_display_results = this.state.data;
-      } else if (button_name === "IT") {
-        user_display_results = this.state.it;
-      } else if (button_name === "Sales") {
-        user_display_results = this.state.sales;
-      } else if (button_name === "Support") {
-        user_display_results = this.state.support;
-      }
-
-      return <div>
-                <h2 className="display__title">{button_name}</h2>
-                <ul className="display__ul">
-                  {user_display_results.map((user, index)=> {
-                    return <div key={index}>
-                        <li onClick={this.singleUserInfo.bind(this, user, index)}>
-                          <span style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
-                          <span>{`${user.first_name} ${user.last_name}`}</span>
-                          <span className="display_span_region">{`${user.region}`}</span>
-                        </li>
-                    </div>
-                  })}
-                </ul>
-            </div>
-    } else {
-      return <div>
-                <h2 className="display__title">User</h2>
-                <ul className="display__ul single-user__ul">
-                {temp_user.map((user, index)=> {
-                  return <div key={index}>
-                            <li>
-                              <span style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
-                              <span>{`${user.first_name} ${user.last_name}`}</span>
-                              <span>{`${user.region}`}</span>
-                            </li>
-                            <div className="single-user__buttons">
-                              <p>Add to:</p>
-                              <p onClick={this.addUser.bind(this, user, index)}>IT</p>
-                              <p onClick={this.addUser.bind(this, user, index)}>Sales</p>
-                              <p onClick={this.addUser.bind(this, user, index)}>Support</p>
-                            </div>
-                        </div>
-                })}
-                </ul>
-            </div>
-    }
-  }
-
-/*------------------------------------------------------*/
-/*--------------- Search Bar Functions -----------------*/
-/*------------------------------------------------------*/
-
-  searchUpdated (event) {
-    this.setState({temp_user: []});
-    const resultsArray = this.results(event.target.value);
-    this.setState({results: resultsArray});
-    document.body.addEventListener("click", this.bodyHideSearchResults);
-  }
-
-  results (wordToMatch) {
-    const data  = this.state.data;
-
-    return data.filter(name => {
-        const regex = new RegExp(wordToMatch, 'gi');
-        return name.first_name.match(regex) || name.last_name.match(regex)
-      });
-  }
-
-  bodyHideSearchResults (e) {
-
-    // Clean input search
-    const search_input = document.querySelector(".search-form__input");
-    search_input.value = "";
-
-    // Hide search results when user clicks outside
-    const search_li_body = event.target.parentElement.classList[0];
-    const search_li_class = document.querySelectorAll(".search_ul_li");
-    console.log(search_li_body);
-
-    search_li_class.forEach(li_class => {
-      if (search_li_body === li_class.classList[0]) {
-        document.body.removeEventListener("click", this.bodyHideSearchResults);
-      }
-      if (search_li_body !== li_class.classList[0]) {
-        this.setState({results: []});
-      }
-    })
-  }
-
-  // This function will display the search results
-
-  search_results () {
-    return (
-      <ul className="display__ul search-form-results__ul">
-        {this.state.results.map((user, index)=> {
-          return <div key={index}>
-            <li className="search_ul_li" onClick={this.singleUserInfo.bind(this, user, index)}>
-              <span style={{background: (user.group === "IT") ? '#3333FF' : (user.group === "Sales") ? '#ffc600' : (user.group === "Support") ? 'green' : 'black'}}></span>
-              <span>{`${user.first_name} ${user.last_name}`}</span>
-              <span>{`${user.region}`}</span>
-            </li>
-          </div>
-        })}
-      </ul>
-    )
-  }
-
-  /*------------------------------------------------*/
-  /*--------------- singleUserInfo -----------------*/
-  /*------------------------------------------------*/
-
-  singleUserInfo (user, index, event) {
-
-    this.setState({results: []});
-
-    const all_buttons_li = document.querySelectorAll(".color-buttons ul li");
-    const div_button_top = document.querySelector(".color-buttons__top--selected");
-
-    div_button_top.style.backgroundColor = "#cf196f";
-
-    all_buttons_li.forEach(button => {
-        button.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    });
-
-    const temp_user_userInfo = this.state.temp_user;
-    temp_user_userInfo.push(user);
-    this.setState({temp_user_userInfo});
-    this.setState({password: "item"});
-  }
-
-  /*------------------------------------------*/
-  /*--------------- Add User -----------------*/
-  /*------------------------------------------*/
-
-  addUser (user, index, e) {
-
-    const user_button = e.target.innerHTML;
-    const group = user.group;
-    let group_array;
-
-    if (group === "IT") {
-      group_array = this.state.it;
-    } else if (group === "Sales") {
-      group_array = this.state.sales;
-    } else if (group === "Support") {
-      group_array = this.state.support;
-    }
-
-    group_array.map((user_old) => {
-      if (user_old.first_name === user.first_name ) {
-        let user_index = group_array.indexOf(user_old);
-        group_array.splice(user_index,1);
-      }
-    });
-
-    let data_group_array;
-    if (user_button === "IT") {
-      user.group = "IT";
-      data_group_array = this.state.it;
-      data_group_array.push(user);
-      this.setState({data_group_array});
-    } else if (user_button === "Sales") {
-      user.group = "Sales";
-      data_group_array = this.state.sales;
-      data_group_array.push(user);
-      this.setState({data_group_array});
-    } else if (user_button === "Support") {
-      user.group = "Support";
-      data_group_array = this.state.support;
-      data_group_array.push(user);
-      this.setState({data_group_array});
-    }
-  }
-
-  /*-----------------------------------------------*/
-  /*------------------ Render ---------------------*/
-  /*-----------------------------------------------*/
-
-  render() {
-
+  // Return the data in ULs for both the labels and the actual users
+  homeResultsDisplay () {
     return <div>
-      <header></header>
-
-        <div className="color-buttons">
-            <div className="color-buttons__top--selected"></div>
-            <ul>
-              <li onClick={this.colorButton}>All</li>
-              <li onClick={this.colorButton}>IT</li>
-              <li onClick={this.colorButton}>Sales</li>
-              <li onClick={this.colorButton}>Support</li>
-            </ul>
-        </div>
-
-        <div>
-          <form className="search-form">
-              <input type="text" className="search-form__input" placeholder="Name" onChange={this.searchUpdated}/>
-            <div>{this.search_results()}</div>
-          </form>
-        </div>
-
-        <div>
-          <div>{this.display()}</div>
-        </div>
-
+      <ul className="home__labels">
+        <li><h4>Organize</h4></li>
+        <li><h4>Sender</h4></li>
+        <li><h4>Domain</h4></li>
+        <li><h4>Email</h4></li>
+        <li><h4>Folder</h4></li>
+      </ul>
+      {this.props.display.map((info, index) => {
+        return <ul data-id={index} key={Math.random()} className={this.ulClass(info)} style={this.resultsDropdownFolderColor(info.folder)}>
+          <li><input type="checkbox" defaultChecked={info.organize} onChange={this.checkboxOrganize}/></li>
+          <li><h5>{info.sender}</h5></li>
+          <li><h5>{info.domain}</h5></li>
+          <li><h5>{info.email}</h5></li>
+          <li data-id={index} >{this.resultsDropdownFolder(info)}</li>
+        </ul>
+      })};
     </div>
   }
 
+  /*------------------------------------------------------*/
+  /*--------------- Ul Styling Functions -----------------*/
+  /*------------------------------------------------------*/
+
+  // Adding a class to the users UL
+  ulClass (info) {
+    if (info.organize) {
+      return 'home__results'
+    }
+    return 'home__results home__results-false'
+  }
+
+  // Adding a borderRight to the users UL
+  resultsDropdownFolderColor(folder) {
+    switch (folder) {
+      case 'Business':
+        return {borderRight: '5px solid #EC5f67'}
+        break;
+      case 'Home':
+        return {borderRight: '5px solid #F99157'}
+        break;
+      case 'Finance':
+        return {borderRight: '5px solid #FAC863'}
+        break;
+      case 'Education':
+        return {borderRight: '5px solid #99C794'}
+        break;
+      case 'Real Estate':
+        return {borderRight: '5px solid #6699CC'}
+        break;
+      case 'Travel':
+        return {borderRight: '5px solid #C594C5'}
+        break;
+      case 'Entertainment':
+        return {borderRight: '5px solid #AB7967'}
+        break;
+      case 'Education':
+        return {borderRight: '5px solid #99C794'}
+        break;
+      case 'Social Networking':
+        return {borderRight: '5px solid #000'}
+        break;
+      case 'News':
+        return {borderRight: '5px solid #FF0099'}
+        break;
+      case 'Jobs':
+        return {borderRight: '5px solid red'}
+        break;
+      case 'Shopping':
+        return {borderRight: '5px solid yellow'}
+        break;
+      case 'Groups':
+        return {borderRight: '5px solid blue'}
+        break;
+      default:
+        return {borderRight: '5px solid black'}
+    }
+  }
+
+  /*---------------------------------------------------*/
+  /*--------------- Checkbox Function -----------------*/
+  /*---------------------------------------------------*/
+
+  checkboxOrganize (event) {
+    //updating JSON to the event.target.checked value
+    const index = event.target.parentNode.parentNode.dataset.id
+    let current = this.props.display[index];
+    current.organize = event.target.checked;
+
+    //changing the inline styling depending on the event.target.checked value
+    let ul = event.target.parentNode.parentNode;
+    let select = event.target.parentNode.parentNode.lastElementChild.childNodes[0];
+    let checked = event.target.checked;
+
+    if (!checked) {
+      ul.style.backgroundColor = "#eee";
+      ul.style.textDecoration = "line-through";
+      select.setAttribute('disabled', 'disabled');
+    }
+    if (checked) {
+      ul.style.backgroundColor = "#fff";
+      ul.style.textDecoration = "none";
+      select.removeAttribute('disabled');
+    }
+  }
+
+  /*-----------------------------------------------------------*/
+  /*--------------- Dropdown Folder Functions -----------------*/
+  /*-----------------------------------------------------------*/
+
+  resultsDropdownFolder (f) {
+
+    //Sorting Array
+
+    let arr = [];
+    this.props.dropdowns.forEach((info)=> {
+      arr.push(info.folder);
+    });
+    arr = arr.filter(( item, index, inputArray ) => {
+        return inputArray.indexOf(item) == index;
+    });
+    arr.sort();
+
+    //Returning Dropdown with adding an onChange event listener to every option
+    return (
+      <select disabled={(f.organize) ? "" : "disabled"} defaultValue={f.folder} name="folder" onChange={this.dropdownFolderPick}>
+        {arr.map((folder)=> {
+          return (
+            <option key={Math.random()} value={folder}> {folder} </option>
+          )
+        })}
+      </select>
+    )
+  }
+
+  dropdownFolderPick (event) {
+    //updating JSON to the event.target.checked value
+    const index = event.target.parentNode.dataset.id;
+    let current = this.props.display[index];
+    current.folder = event.target.value;
+
+    //chaging the borderRight for the user UL
+    const ul = event.target.parentNode.parentNode;
+    const value = event.target.value;
+    const s = this.resultsDropdownFolderColor(value);
+    ul.style.borderRight = s.borderRight;
+  }
+
+  /*----------------------------------------*/
+  /*--------------- Render -----------------*/
+  /*----------------------------------------*/
+
+  render() {
+    return <div>
+      <Header/>
+      <Filter/>
+      <section className="home">{this.homeResultsDisplay()}</section>
+    </div>
+  }
 }
 
-export default Home;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators ({API, dropdownsAPI}, dispatch);
+}
+
+function mapStateToProps(state){
+  return {
+    display: state.display.display,
+    dropdowns: state.filterDropdown.filterDropdown
+  };
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (Home);
